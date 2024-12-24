@@ -822,8 +822,7 @@ main section {
 }
 
 .collaborations-section {
-  min-height: 95vh;
-  padding: 6rem calc(var(--sidebar-width-collapsed) + 1rem);
+  padding: 10rem calc(var(--sidebar-width-collapsed) + 1rem);
 
   background: var(--light-bg);
 }
@@ -918,7 +917,7 @@ main section {
   }
 }
 .contact-section {
-  padding: 6rem calc(var(--sidebar-width-collapsed) + 1rem);
+  padding: 2rem calc(var(--sidebar-width-collapsed) + 1rem);
 
   background: var(--light-bg);
 }

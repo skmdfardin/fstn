@@ -1,8 +1,22 @@
-// Initialize AOS
-AOS.init();
+// Initialize AOS with optimized settings
+AOS.init({
+  offset: 100, // Reduced offset to trigger earlier
+  delay: 0,
+  duration: 800,
+  easing: "ease-in-out",
+  once: true,
+  mirror: false,
+  anchorPlacement: "top-center", // Changed to trigger when element reaches viewport center
+  startEvent: "load", // Trigger animations on page load
+  disable: "mobile", // Optionally disable on mobile for performance
+});
 
-// Carousel functionality
 document.addEventListener("DOMContentLoaded", () => {
+  // Refresh AOS when all content is loaded
+  window.addEventListener("load", () => {
+    AOS.refresh();
+  });
+
   let currentSlide = 0;
   const slides = document.querySelectorAll(".carousel-container img");
   const totalSlides = slides.length;
@@ -79,6 +93,9 @@ const sectionObserver = new IntersectionObserver(
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
         entry.target.classList.add("visible");
+        if (!entry.target.classList.contains("aos-animate")) {
+          entry.target.classList.add("aos-animate");
+        }
         sectionObserver.unobserve(entry.target);
       }
     });
