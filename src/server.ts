@@ -80,6 +80,16 @@ app.post("/api/enquiry", (req: Request, res: Response) => {
   }
 });
 
+// Add these routes after your existing routes
+app.get("/robots.txt", (req, res) => {
+  res.type("text/plain");
+  res.sendFile(join(__dirname, "../public/robots.txt"));
+});
+
+app.get("/sitemap.xml", (req, res) => {
+  res.type("application/xml");
+  res.sendFile(join(__dirname, "../public/sitemap.xml"));
+});
 // Error handling middleware
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error(err.stack);
