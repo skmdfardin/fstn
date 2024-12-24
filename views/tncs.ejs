@@ -10,8 +10,51 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body>
+  <body class="font-newsreader">
+    <dialog id="enquiryDialog" class="enquiry-dialog" loading="lazy">
+      <div class="dialog-content">
+        <button class="close-dialog" onclick="closeEnquiryDialog()">×</button>
+        <h2>Enquire Now</h2>
+        <form id="enquiryFormDialog" class="contact-form">
+          <div class="form-group">
+            <label for="dialogName">Full Name *</label>
+            <input type="text" id="dialogName" name="name" required />
+          </div>
+
+          <div class="form-group">
+            <label for="dialogEmail">Email Address *</label>
+            <input type="email" id="dialogEmail" name="email" required />
+          </div>
+
+          <div class="form-group">
+            <label for="dialogMobile">Mobile Number *</label>
+            <div class="mobile-input-container">
+              <select id="dialogCountryCode" name="countryCode">
+                <option value="+91">+91 (India)</option>
+                <option value="+1">+1 (USA/Canada)</option>
+                <option value="+44">+44 (UK)</option>
+                <option value="+971">+971 (UAE)</option>
+              </select>
+              <input type="tel" id="dialogMobile" name="mobile" required />
+            </div>
+          </div>
+
+          <div class="form-group checkbox-group">
+            <input type="checkbox" id="dialogIsWhatsapp" name="isWhatsapp" />
+            <label for="dialogIsWhatsapp">This is my WhatsApp number</label>
+          </div>
+
+          <button type="submit" class="submit-btn">Submit Enquiry</button>
+        </form>
+      </div>
+    </dialog>
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
       <div class="logo-container" id="sidebarLogoContainer">
@@ -33,7 +76,7 @@
             </button>
           </li>
           <li>
-            <a href="#courses"
+            <a href="/#courses"
               ><i class="fas fa-graduation-cap"></i><span>Courses</span></a
             >
           </li>

@@ -2,6 +2,7 @@ import express, { Request, Response, NextFunction } from "express";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 import cors from "cors";
+import compression from "compression";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -9,6 +10,7 @@ const __dirname = dirname(__filename);
 // Initialize express app
 const app = express();
 const PORT = process.env.PORT || 3000;
+app.use(compression());
 
 // Middleware
 app.use(cors());

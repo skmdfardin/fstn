@@ -3,75 +3,136 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Privacy Policy - FSTN Exploration Foundation</title>
+    <meta
+      name="description"
+      content="FSTN Exploration Foundation's Privacy Policy - Learn how we protect and handle your personal information, data security measures, and your rights as a student."
+    />
+    <meta
+      name="keywords"
+      content="FSTN privacy policy, student data protection, educational privacy, FSTN Foundation, data security"
+    />
+    <meta name="author" content="FSTN Exploration Foundation" />
+    <meta name="robots" content="index, follow" />
+    <meta
+      property="og:title"
+      content="Privacy Policy - FSTN Exploration Foundation"
+    />
+    <meta
+      property="og:description"
+      content="FSTN Exploration Foundation's Privacy Policy - Learn how we protect and handle your personal information."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://fstn.co.in/privacy" />
+    <title>
+      Privacy Policy | FSTN Exploration Foundation - Student Data Protection
+    </title>
+    <link rel="canonical" href="https://fstn.co.in/privacy" />
     <link rel="stylesheet" href="styles.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap"
+      rel="stylesheet"
+    />
   </head>
-  <body>
+  <body class="font-newsreader">
+    <dialog id="enquiryDialog" class="enquiry-dialog" loading="lazy">
+      <div class="dialog-content">
+        <button class="close-dialog" onclick="closeEnquiryDialog()">×</button>
+        <h2>Enquire Now</h2>
+        <form id="enquiryFormDialog" class="contact-form">
+          <div class="form-group">
+            <label for="dialogName">Full Name *</label>
+            <input type="text" id="dialogName" name="name" required />
+          </div>
+
+          <div class="form-group">
+            <label for="dialogEmail">Email Address *</label>
+            <input type="email" id="dialogEmail" name="email" required />
+          </div>
+
+          <div class="form-group">
+            <label for="dialogMobile">Mobile Number *</label>
+            <div class="mobile-input-container">
+              <select id="dialogCountryCode" name="countryCode">
+                <option value="+91">+91 (India)</option>
+                <option value="+1">+1 (USA/Canada)</option>
+                <option value="+44">+44 (UK)</option>
+                <option value="+971">+971 (UAE)</option>
+              </select>
+              <input type="tel" id="dialogMobile" name="mobile" required />
+            </div>
+          </div>
+
+          <div class="form-group checkbox-group">
+            <input type="checkbox" id="dialogIsWhatsapp" name="isWhatsapp" />
+            <label for="dialogIsWhatsapp">This is my WhatsApp number</label>
+          </div>
+
+          <button type="submit" class="submit-btn">Submit Enquiry</button>
+        </form>
+      </div>
+    </dialog>
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
       <div class="logo-container" id="sidebarLogoContainer">
-        <img src="assets/logo.svg" alt="FSTN Logo" class="sidebar-logo" />
+        <img
+          src="assets/logo.svg"
+          alt="FSTN Exploration Foundation Logo"
+          class="sidebar-logo"
+        />
       </div>
-      <nav>
+      <nav aria-label="Main navigation">
         <ul>
           <li>
-            <a href="/"><i class="fas fa-home"></i><span>Home</span></a>
+            <a href="/" title="Home"
+              ><i class="fas fa-home"></i><span>Home</span></a
+            >
           </li>
           <li>
-            <a href="/#about"
+            <a href="/#about" title="About Us"
               ><i class="fas fa-info-circle"></i><span>About Us</span></a
             >
           </li>
           <li>
-            <a href="/#membership"
-              ><i class="fas fa-users"></i><span>Membership</span></a
-            >
+            <button onclick="openEnquiryDialog()" class="sidebar-button">
+              <i class="fas fa-users"></i><span>Membership</span>
+            </button>
           </li>
           <li>
-            <a href="#courses"
+            <a href="/#courses" title="Courses"
               ><i class="fas fa-graduation-cap"></i><span>Courses</span></a
             >
           </li>
-          <!-- <li>
-              <a href="#visits"
-                ><i class="fas fa-industry"></i><span>Industry Visits</span></a
-              >
-            </li> -->
-          <!-- <li>
-              <a href="/#events"
-                ><i class="fas fa-calendar-alt"></i
-                ><span>Conference & Workshops</span></a
-              >
-            </li> -->
           <li>
-            <a href="/#collaborations"
+            <a href="/#collaborations" title="Academic Collaborations"
               ><i class="fas fa-handshake"></i
               ><span>Academic Collaborations</span></a
             >
           </li>
           <li>
-            <a href="/#bos"
+            <a href="/#bos" title="BOS Members"
               ><i class="fas fa-user-tie"></i><span>BOS Members</span></a
             >
           </li>
           <li>
-            <a href="/#contact"
+            <a href="/#contact" title="Contact Us"
               ><i class="fas fa-envelope"></i><span>Contact Us</span></a
             >
           </li>
           <li>
-            <a href="/tncs"
+            <a href="/tncs" title="Terms and Conditions"
               ><i class="fas fa-file-contract"></i
               ><span>Terms & Conditions</span></a
             >
           </li>
           <li>
-            <a href="/privacy"
+            <a href="/privacy" title="Privacy Policy"
               ><i class="fas fa-shield-alt"></i><span>Privacy Policy</span></a
             >
           </li>
@@ -81,7 +142,7 @@
 
     <!-- Header -->
     <header>
-      <h1>FSTN Exploration Foundation</h1>
+      <h1>Privacy Policy - FSTN Exploration Foundation</h1>
     </header>
 
     <main>
@@ -90,72 +151,78 @@
           <h2>Privacy Policy</h2>
 
           <div class="privacy-content">
-            <h3>1. Information We Collect</h3>
-            <p>
-              We collect personal information including name, email, phone
-              number, and educational background during registration and course
-              enrollment.
-            </p>
+            <article>
+              <h3>1. Information We Collect</h3>
+              <p>
+                We collect personal information including name, email, phone
+                number, and educational background during registration and
+                course enrollment.
+              </p>
 
-            <h3>2. Use of Information</h3>
-            <p>Your information is used for:</p>
-            <ul>
-              <li>Course administration and communication</li>
-              <li>Certificate issuance</li>
-              <li>Educational updates and newsletters</li>
-              <li>Academic record maintenance</li>
-            </ul>
+              <h3>2. Use of Information</h3>
+              <p>Your information is used for:</p>
+              <ul>
+                <li>Course administration and communication</li>
+                <li>Certificate issuance</li>
+                <li>Educational updates and newsletters</li>
+                <li>Academic record maintenance</li>
+              </ul>
 
-            <h3>3. Data Security</h3>
-            <p>
-              We implement industry-standard security measures to protect your
-              personal information from unauthorized access or disclosure.
-            </p>
+              <h3>3. Data Security</h3>
+              <p>
+                We implement industry-standard security measures to protect your
+                personal information from unauthorized access or disclosure.
+              </p>
 
-            <h3>4. Information Sharing</h3>
-            <p>
-              We do not sell or share your personal information with third
-              parties except as required for educational partnerships and
-              certifications.
-            </p>
+              <h3>4. Information Sharing</h3>
+              <p>
+                We do not sell or share your personal information with third
+                parties except as required for educational partnerships and
+                certifications.
+              </p>
 
-            <h3>5. Cookies and Tracking</h3>
-            <p>
-              Our website uses cookies to enhance user experience and analyze
-              website traffic.
-            </p>
+              <h3>5. Cookies and Tracking</h3>
+              <p>
+                Our website uses cookies to enhance user experience and analyze
+                website traffic.
+              </p>
 
-            <h3>6. Student Rights</h3>
-            <p>Students have the right to:</p>
-            <ul>
-              <li>Access their personal data</li>
-              <li>Request data corrections</li>
-              <li>Opt-out of marketing communications</li>
-              <li>
-                Request data deletion (subject to academic record requirements)
-              </li>
-            </ul>
+              <h3>6. Student Rights</h3>
+              <p>Students have the right to:</p>
+              <ul>
+                <li>Access their personal data</li>
+                <li>Request data corrections</li>
+                <li>Opt-out of marketing communications</li>
+                <li>
+                  Request data deletion (subject to academic record
+                  requirements)
+                </li>
+              </ul>
 
-            <h3>7. Data Retention</h3>
-            <p>
-              We retain student records as required by educational regulations
-              and for certification verification purposes.
-            </p>
+              <h3>7. Data Retention</h3>
+              <p>
+                We retain student records as required by educational regulations
+                and for certification verification purposes.
+              </p>
 
-            <h3>8. Third-Party Services</h3>
-            <p>
-              We may use third-party services for payment processing, email
-              communication, and learning management systems.
-            </p>
+              <h3>8. Third-Party Services</h3>
+              <p>
+                We may use third-party services for payment processing, email
+                communication, and learning management systems.
+              </p>
 
-            <h3>9. Policy Updates</h3>
-            <p>
-              This privacy policy may be updated periodically. Users will be
-              notified of significant changes.
-            </p>
+              <h3>9. Policy Updates</h3>
+              <p>
+                This privacy policy may be updated periodically. Users will be
+                notified of significant changes.
+              </p>
 
-            <h3>10. Contact Information</h3>
-            <p>For privacy-related inquiries, contact us at privacy@fstn.org</p>
+              <h3>10. Contact Information</h3>
+              <p>
+                For privacy-related inquiries, contact us at
+                <a href="mailto:privacy@fstn.org">privacy@fstn.org</a>
+              </p>
+            </article>
           </div>
         </div>
       </section>
@@ -166,13 +233,12 @@
         <div class="footer-section">
           <h3>Contact Us</h3>
           <p>
-            <a href="mailto:editorialfstn@gmail.com" style="color: white"
+            <a href="mailto:editorialfstn@gmail.com" aria-label="Email us"
               >editorialfstn@gmail.com</a
             >
           </p>
-
           <p>
-            <a href="tel:+919002435977" style="color: white"
+            <a href="tel:+919002435977" aria-label="Call us"
               >+91 9002 435 977</a
             >
           </p>
@@ -180,9 +246,15 @@
         <div class="footer-section">
           <h3>Follow Us</h3>
           <div class="social-links">
-            <a href="#"><i class="fab fa-facebook"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#" aria-label="Visit our Facebook page"
+              ><i class="fab fa-facebook"></i
+            ></a>
+            <a href="#" aria-label="Visit our Twitter profile"
+              ><i class="fab fa-twitter"></i
+            ></a>
+            <a href="#" aria-label="Visit our LinkedIn profile"
+              ><i class="fab fa-linkedin"></i
+            ></a>
           </div>
         </div>
       </div>
