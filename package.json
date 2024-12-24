@@ -2,7 +2,8 @@
   "scripts": {
     "start": "node dist/server.js",
     "dev": "nodemon src/server.ts",
-    "build": "tsc",
+    "minify": "gulp",
+    "build": "tsc && npm run minify",
     "watch": "tsc -w"
   },
   "devDependencies": {
@@ -17,7 +18,10 @@
     "compression": "^1.7.5",
     "cors": "^2.8.5",
     "ejs": "^3.1.10",
-    "express": "^4.21.2"
+    "express": "^4.21.2",
+    "gulp": "^5.0.0",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-rename": "^2.0.0"
   },
   "type": "module"
 }
