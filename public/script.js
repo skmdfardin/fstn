@@ -63,3 +63,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+function openEnquiryDialog() {
+  const dialog = document.getElementById("enquiryDialog");
+  dialog.showModal();
+}
+
+function closeEnquiryDialog() {
+  const dialog = document.getElementById("enquiryDialog");
+  dialog.close();
+}

@@ -71,6 +71,45 @@
     </script>
   </head>
   <body class="font-newsreader">
+    <!-- Add this right after the opening <body> tag -->
+<dialog id="enquiryDialog" class="enquiry-dialog">
+  <div class="dialog-content">
+    <button class="close-dialog" onclick="closeEnquiryDialog()">×</button>
+    <h2>Enquire Now</h2>
+    <form id="enquiryFormDialog" class="contact-form">
+      <div class="form-group">
+        <label for="dialogName">Full Name *</label>
+        <input type="text" id="dialogName" name="name" required />
+      </div>
+
+      <div class="form-group">
+        <label for="dialogEmail">Email Address *</label>
+        <input type="email" id="dialogEmail" name="email" required />
+      </div>
+
+      <div class="form-group">
+        <label for="dialogMobile">Mobile Number *</label>
+        <div class="mobile-input-container">
+          <select id="dialogCountryCode" name="countryCode">
+            <option value="+91">+91 (India)</option>
+            <option value="+1">+1 (USA/Canada)</option>
+            <option value="+44">+44 (UK)</option>
+            <option value="+971">+971 (UAE)</option>
+          </select>
+          <input type="tel" id="dialogMobile" name="mobile" required />
+        </div>
+      </div>
+
+      <div class="form-group checkbox-group">
+        <input type="checkbox" id="dialogIsWhatsapp" name="isWhatsapp" />
+        <label for="dialogIsWhatsapp">This is my WhatsApp number</label>
+      </div>
+
+      <button type="submit" class="submit-btn">Submit Enquiry</button>
+    </form>
+  </div>
+</dialog>
+
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
       <div class="logo-container header" id="sidebarLogoContainer">
@@ -82,15 +121,16 @@
             <a href="/"><i class="fas fa-home"></i><span>Home</span></a>
           </li>
           <li>
-            <a href="/#about"
-              ><i class="fas fa-info-circle"></i><span>About Us</span></a
-            >
+            <li>
+              <a href="#about"><i class="fas fa-info-circle"></i><span>About Us</span></a>
+            </li>
           </li>
           <li>
-            <a href="/#membership"
-              ><i class="fas fa-users"></i><span>Membership</span></a
-            >
+            <button class="sidebar-button" onclick="openEnquiryDialog()">
+              <i class="fas fa-users"></i><span>Membership</span>
+            </button>
           </li>
+          
           <!-- <li>
               <a href="#courses"
                 ><i class="fas fa-graduation-cap"></i><span>Courses</span></a
@@ -119,9 +159,9 @@
             >
           </li>
           <li>
-            <a href="/#contact"
-              ><i class="fas fa-envelope"></i><span>Contact Us</span></a
-            >
+            <li>
+              <a href="#contact"><i class="fas fa-envelope"></i><span>Contact Us</span></a>
+            </li>
           </li>
           <li>
             <a href="/tncs"
@@ -143,10 +183,10 @@
     <header>
       <h1>FSTN Exploration Foundation</h1>
       <div class="header-shortcuts">
-        <a href="#membership" class="shortlink-btn">
+        <button class="shortlink-btn" onclick="openEnquiryDialog()">
           <i class="fas fa-user-plus"></i>
           Join Us
-        </a>
+        </button>
         <a href="#about" class="shortlink-btn">
           <i class="fas fa-info-circle"></i>
           Know Us
@@ -179,7 +219,7 @@
           Providing translational research-based curriculum and awareness in
           collaboration with Skill India
         </p>
-        <button class="cta-btn" onclick="window.location.href='#membership'">
+        <button class="cta-btn" onclick="openEnquiryDialog()">
           Enquire now
         </button>
       </div>
@@ -273,42 +313,76 @@
           </div>
         </div>
       </section>
-
-      <section class="enquiry-form" data-aos="fade-up" id="membership">
-        <h2>Enquire Now</h2>
-        <form id="enquiryForm" class="contact-form">
-          <div class="form-group">
-            <label for="name">Full Name *</label>
-            <input type="text" id="name" name="name" required />
-          </div>
-
-          <div class="form-group">
-            <label for="email">Email Address *</label>
-            <input type="email" id="email" name="email" required />
-          </div>
-
-          <div class="form-group">
-            <label for="mobile">Mobile Number *</label>
-            <div class="mobile-input-container">
-              <select id="countryCode" name="countryCode">
-                <option value="+91">+91 (India)</option>
-                <option value="+1">+1 (USA/Canada)</option>
-                <option value="+44">+44 (UK)</option>
-                <option value="+971">+971 (UAE)</option>
-                <!-- Add more country codes as needed -->
-              </select>
-              <input type="tel" id="mobile" name="mobile" required />
+      <section class="course-list" data-aos="fade-up">
+        <div class="course-container">
+          <h2>Professional Certification Programs</h2>
+          <p class="section-subtitle">Transform Your Career with Industry-Recognized Certifications</p>
+      
+          <div class="course-flex">
+            <div class="course-card" data-aos="zoom-in" data-aos-delay="100">
+              <img src="assets/diabetes.png" alt="Certified Diabetes Educator" width="200" height="150">
+              <div class="course-content">
+                <h3>Certified Diabetes Educator (CDE)</h3>
+                <ul class="course-features">
+                  <li>Comprehensive diabetes management</li>
+                  <li>Medical nutrition therapy</li>
+                  <li>Blood glucose monitoring</li>
+                  <li>Lifestyle modification counseling</li>
+                </ul>
+                <div class="button-meta-wrapper">
+                  <div class="course-meta">
+                    <span><i class="fas fa-clock"></i> 6 Months</span>
+                    <span><i class="fas fa-certificate"></i> Professional Certificate</span>
+                  </div>
+                  <button onclick="openEnquiryDialog()" class="course-btn">Enroll Now</button>
+                </div>
+              </div>
+            </div>
+      
+            <div class="course-card" data-aos="zoom-in" data-aos-delay="200">
+              <img src="assets/nutritionist.png" alt="Certified Nutritionist" width="200" height="150">
+              <div class="course-content">
+                <h3>Certified Nutritionist (CN)</h3>
+                <ul class="course-features">
+                  <li>Advanced nutrition science</li>
+                  <li>Therapeutic meal planning</li>
+                  <li>Sports nutrition</li>
+                  <li>Nutrition counseling</li>
+                </ul>
+                <div class="button-meta-wrapper">
+                  <div class="course-meta">
+                    <span><i class="fas fa-clock"></i> 6 Months</span>
+                    <span><i class="fas fa-certificate"></i> Professional Certificate</span>
+                  </div>
+                  <button onclick="openEnquiryDialog()" class="course-btn">Enroll Now</button>
+                </div>
+              </div>
+            </div>
+      
+            <div class="course-card" data-aos="zoom-in" data-aos-delay="300">
+              <img src="assets/ai-public-health.png" alt="AI in Public Health" width="200" height="150">
+              <div class="course-content">
+                <h3>AI in Public Health (AIPH)</h3>
+                <ul class="course-features">
+                  <li>AI fundamentals for healthcare</li>
+                  <li>Machine learning basics</li>
+                  <li>Health data analytics</li>
+                  <li>AI ethics in healthcare</li>
+                </ul>
+                <div class="button-meta-wrapper">
+                  <div class="course-meta">
+                    <span><i class="fas fa-clock"></i> 6 Months</span>
+                    <span><i class="fas fa-certificate"></i> Professional Certificate</span>
+                  </div>
+                  <button onclick="openEnquiryDialog()" class="course-btn">Enroll Now</button>
+                </div>
+              </div>
             </div>
           </div>
-
-          <div class="form-group checkbox-group">
-            <input type="checkbox" id="isWhatsapp" name="isWhatsapp" />
-            <label for="isWhatsapp">This is my WhatsApp number</label>
-          </div>
-
-          <button type="submit" class="submit-btn">Submit Enquiry</button>
-        </form>
-      </section>
+        </div>
+      </section>      
+      
+      
     </main>
     <section id="about" class="about-section" data-aos="fade-up">
       <div class="about-container">

@@ -15,18 +15,21 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Set view engine to EJS
+app.set("view engine", "ejs");
+app.set("views", join(__dirname, "../views"));
 // Static files middleware
 app.use(express.static(join(__dirname, "../public")));
 
 // Routes
 app.get("/", (req: Request, res: Response) => {
-  res.sendFile(join(__dirname, "../public/index.html"));
+  res.render("index");
 });
 app.get("/tncs", (req, res) => {
-  res.sendFile(join(__dirname, "../public/tncs.html"));
+  res.render("tncs");
 });
 app.get("/privacy", (req, res) => {
-  res.sendFile(join(__dirname, "../public/privacy.html"));
+  res.render("privacy");
 });
 
 // API endpoints
