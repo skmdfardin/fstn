@@ -16,6 +16,35 @@ app.use(compression());
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+// Add caching headers
+app.use((req, res, next) => {
+  if (req.url.match(/\.(css|js|jpg|png|svg)$/)) {
+    res.setHeader("Cache-Control", "public, max-age=31536000");
+  }
+  next();
+});
+app.use(
+  express.static("public", {
+    maxAge: "1y",
+    etag: true,
+  })
+);
+app.use(
+  "/assets",
+  express.static("public/assets", {
+    maxAge: "1y",
+    etag: true,
+  })
+);
+app.use((req, res, next) => {
+  res.setHeader(
+    "Strict-Transport-Security",
+    "max-age=31536000; includeSubDomains"
+  );
+  res.setHeader("X-Content-Type-Options", "nosniff");
+  res.setHeader("X-Frame-Options", "SAMEORIGIN");
+  next();
+});
 
 // Set view engine to EJS
 app.set("view engine", "ejs");
