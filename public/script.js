@@ -73,3 +73,22 @@ function closeEnquiryDialog() {
   const dialog = document.getElementById("enquiryDialog");
   dialog.close();
 }
+// Initialize Intersection Observer for sections
+const sectionObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        sectionObserver.unobserve(entry.target);
+      }
+    });
+  },
+  {
+    threshold: 0.1,
+  }
+);
+
+// Observe all sections
+document.querySelectorAll("section").forEach((section) => {
+  sectionObserver.observe(section);
+});
