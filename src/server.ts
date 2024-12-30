@@ -10,7 +10,18 @@ const __dirname = dirname(__filename);
 // Initialize express app
 const app = express();
 const PORT = process.env.PORT || 3000;
-app.use(compression());
+app.use(
+  compression({
+    level: 6,
+    threshold: 0,
+    filter: (req, res) => {
+      if (req.headers["x-no-compression"]) {
+        return false;
+      }
+      return compression.filter(req, res);
+    },
+  })
+);
 
 // Middleware
 app.use(cors());
