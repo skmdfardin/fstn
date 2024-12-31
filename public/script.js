@@ -15,8 +15,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // Refresh AOS when all content is loaded
   window.addEventListener("load", () => {
     AOS.refresh();
+    openPromoDialog();
   });
-
   let currentSlide = 0;
   const slides = document.querySelectorAll(".carousel-container img");
   const totalSlides = slides.length;
@@ -76,6 +76,19 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("Failed to submit enquiry. Please try again.");
     }
   });
+
+  document.addEventListener("DOMContentLoaded", () => {
+    console.log("DOM Content Loaded");
+
+    setTimeout(() => {
+      const promoDialog = document.getElementById("promoDialog");
+      console.log("Found dialog:", promoDialog);
+      if (promoDialog) {
+        promoDialog.showModal();
+        console.log("Dialog shown");
+      }
+    }, 1000);
+  });
 });
 
 function openEnquiryDialog() {
@@ -87,6 +100,7 @@ function closeEnquiryDialog() {
   const dialog = document.getElementById("enquiryDialog");
   dialog.close();
 }
+
 // Initialize Intersection Observer for sections
 const sectionObserver = new IntersectionObserver(
   (entries) => {
@@ -141,4 +155,15 @@ if (window.matchMedia) {
     localStorage.setItem("theme", newTheme);
     updateIcon(newTheme);
   });
+}
+
+// Dialog control functions
+function openPromoDialog() {
+  const dialog = document.getElementById("promoDialog");
+  dialog.showModal();
+}
+
+function closePromoDialog() {
+  const dialog = document.getElementById("promoDialog");
+  dialog.close();
 }
