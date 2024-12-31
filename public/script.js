@@ -166,4 +166,5 @@ function openPromoDialog() {
 function closePromoDialog() {
   const dialog = document.getElementById("promoDialog");
   dialog.close();
+  dialog.style.display = "none";
 }
