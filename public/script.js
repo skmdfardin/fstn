@@ -109,3 +109,36 @@ const sectionObserver = new IntersectionObserver(
 document.querySelectorAll("section").forEach((section) => {
   sectionObserver.observe(section);
 });
+
+// Theme switching functionality
+const themeToggle = document.getElementById("themeToggle");
+const icon = themeToggle.querySelector("i");
+
+// Check for saved theme preference
+const savedTheme = localStorage.getItem("theme") || "light";
+document.documentElement.setAttribute("data-theme", savedTheme);
+updateIcon(savedTheme);
+
+themeToggle.addEventListener("click", () => {
+  const currentTheme = document.documentElement.getAttribute("data-theme");
+  const newTheme = currentTheme === "light" ? "dark" : "light";
+
+  document.documentElement.setAttribute("data-theme", newTheme);
+  localStorage.setItem("theme", newTheme);
+  updateIcon(newTheme);
+});
+
+function updateIcon(theme) {
+  icon.className = theme === "light" ? "fas fa-moon" : "fas fa-sun";
+}
+
+// Add prefers-color-scheme media query support
+if (window.matchMedia) {
+  const colorSchemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
+  colorSchemeQuery.addEventListener("change", (e) => {
+    const newTheme = e.matches ? "dark" : "light";
+    document.documentElement.setAttribute("data-theme", newTheme);
+    localStorage.setItem("theme", newTheme);
+    updateIcon(newTheme);
+  });
+}
