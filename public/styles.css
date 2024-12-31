@@ -45,12 +45,13 @@ body.sidebar-active {
 
 /* Updated Logo Styles */
 #sidebarLogoContainer {
-  padding: 20px;
+  /* padding: 20px; */
   text-align: center;
   background: rgba(255, 255, 255, 0.1);
   display: flex;
   justify-content: center;
   align-items: center;
+  height: var(--sidebar-width-collapsed);
 }
 
 .sidebar-logo {
@@ -71,10 +72,14 @@ body.sidebar-active {
 }
 .sidebar:hover #sidebarLogoContainer {
   width: 100%;
+  height: auto !important;
+  padding: 0.5rem;
 }
 .sidebar nav ul {
   list-style: none;
   padding: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .sidebar nav ul li a {
@@ -119,9 +124,9 @@ header {
   background: linear-gradient(180deg, #425262, #2c3e50);
   background-size: 300% 100%;
   animation: headerGradient 15s ease infinite;
-  color: white;
+  color: #fff;
   padding: 0;
-  height: var(--header-height);
+  height: var(--sidebar-width-collapsed);
   display: flex;
   align-items: center;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -550,9 +555,11 @@ footer {
 }
 
 .about-section {
-  padding: 6rem calc(var(--sidebar-width-collapsed) + 1rem);
-
   background: var(--light-bg);
+  padding-left: calc(var(--sidebar-width-collapsed) + 1rem);
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+  padding-right: 3rem;
 }
 
 .about-container {
@@ -1160,6 +1167,7 @@ main {
   width: 100%;
   overflow: hidden;
   padding-left: var(--sidebar-width-collapsed);
+  background: var(--light-bg);
 }
 
 section {
@@ -1240,7 +1248,7 @@ section.visible {
 }
 .course-list {
   padding: 6rem 2rem;
-  background: linear-gradient(to bottom, #ffffff, #f8f9fa);
+  background: var(--light-bg);
 }
 
 .course-container {
@@ -1426,14 +1434,7 @@ section.visible {
 }
 .testimonials-section {
   padding: 6rem 2rem;
-  background-image: linear-gradient(
-      rgba(255, 255, 255, 0.97),
-      rgba(255, 255, 255, 0.97)
-    ),
-    url("https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80");
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+  background: var(--light-bg);
   position: relative;
 }
 
@@ -1567,6 +1568,7 @@ blockquote {
   box-shadow: 0 4px 15px var(--shadow);
   transition: all 0.3s ease;
   overflow: hidden;
+  max-height: 600px !important;
 }
 
 .video-card:hover {
@@ -1579,14 +1581,56 @@ blockquote {
   padding-bottom: 177.6%; /* Aspect ratio for vertical video (872/491 = 1.776) */
   height: 0;
   overflow: hidden;
+  max-height: 600px !important;
 }
+/* Responsive breakpoints */
 @media screen and (max-width: 1024px) {
   .video-card {
     flex: 0 0 calc(50% - 2rem); /* 2 cards per row */
   }
 }
+:root {
+  --plyr-color-main: var(--primary-color, #4a90e2);
+  --plyr-video-background: var(--secondary-color, #f8f9fa);
+  --plyr-range-fill-background: var(--primary-color, #4a90e2);
+  --plyr-control-icon-size: 18px;
+}
+.plyr__video-embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  max-height: 600px !important;
+}
+.plyr {
+  /* height: 100%; */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  border-radius: 12px;
+  max-height: 600px !important;
+}
 
-/* Mobile Layout */
+.plyr--video {
+  /* height: 100%; */
+  border-radius: 12px;
+  overflow: hidden;
+  aspect-ratio: 9/16;
+  background: var(--bg-secondary);
+}
+.plyr__poster {
+  max-height: 600px !important;
+  height: unset !important;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+}
+.plyr--video.plyr--stopped .plyr__controls {
+  display: none;
+}
+
 @media screen and (max-width: 768px) {
   .video-card {
     flex: 0 0 100%; /* 1 card per row */
@@ -1615,14 +1659,32 @@ blockquote {
   left: 0;
   width: 100%;
   height: 100%;
-  border-radius: 12px;
-  overflow: hidden;
+  z-index: 2;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
 }
 
 .video-thumbnail img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.plyr__video-embed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.plyr__video-embed iframe {
+  pointer-events: none !important;
+  z-index: 1;
+}
+
+.plyr--hide-controls::after {
+  display: none;
 }
 /* Add these styles to your existing CSS */
 .promo-dialog {
@@ -1701,3 +1763,30 @@ blockquote {
 [data-theme="dark"] .promo-dialog::backdrop {
   background: rgba(0, 0, 0, 0.8);
 }
+/* Target YouTube player elements with maximum specificity */
+/* .plyr__video-embed iframe { */
+/* pointer-events: none; */
+/* } */
+/*  */
+/* .plyr__video-embed .ytp-chrome-top, */
+/* .plyr__video-embed .ytp-chrome-bottom, */
+/* .plyr__video-embed .ytp-gradient-top, */
+/* .plyr__video-embed .ytp-gradient-bottom, */
+/* .plyr__video-embed .ytp-large-play-button, */
+/* .plyr__video-embed .ytp-button { */
+/* opacity: 0 !important; */
+/* display: none !important; */
+/* visibility: hidden !important; */
+/* } */
+/*  */
+/* Additional layer of control through iframe parameters */
+/* .plyr__video-embed iframe[src*="youtube.com"] { */
+/* pointer-events: none; */
+/* } */
+/* .plyr__video-embed iframe { */
+/* pointer-events: none !important; */
+/* } */
+/*  */
+/* .plyr--youtube .plyr__video-embed iframe { */
+/* z-index: -1; */
+/* } */

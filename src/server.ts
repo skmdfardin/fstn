@@ -91,6 +91,10 @@ app.post("/api/enquiry", (req: Request, res: Response) => {
   }
 });
 
+app.get("/manifest.json", (req, res) => {
+  res.sendFile(join(__dirname, "../public/manifest.json"));
+});
+
 // Add these routes after your existing routes
 app.get("/robots.txt", (req, res) => {
   res.type("text/plain");

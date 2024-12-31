@@ -12,85 +12,104 @@ AOS.init({
 });
 
 document.addEventListener("DOMContentLoaded", () => {
+  const players = Plyr.setup(".plyr__video-embed", {
+    controls: ["play", "progress", "current-time", "mute", "volume"],
+    hideControls: false,
+    resetOnEnd: true,
+    fullscreen: { enabled: false },
+    youtube: {
+      noCookie: true,
+      rel: 0,
+      showinfo: 0,
+      iv_load_policy: 3,
+      modestbranding: 1,
+      playsinline: 1,
+    },
+  });
+
   // Refresh AOS when all content is loaded
   window.addEventListener("load", () => {
     AOS.refresh();
     openPromoDialog();
   });
-  let currentSlide = 0;
+
+  // Initialize carousel only if elements exist
+  const nextButton = document.querySelector(".next");
+  const prevButton = document.querySelector(".prev");
   const slides = document.querySelectorAll(".carousel-container img");
-  const totalSlides = slides.length;
 
-  function showSlide(n) {
-    slides.forEach((slide) => (slide.style.display = "none"));
-    slides[n].style.display = "block";
+  if (nextButton && prevButton && slides.length > 0) {
+    let currentSlide = 0;
+    const totalSlides = slides.length;
+
+    function showSlide(n) {
+      slides.forEach((slide) => (slide.style.display = "none"));
+      slides[n].style.display = "block";
+    }
+
+    nextButton.addEventListener("click", () => {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      showSlide(currentSlide);
+    });
+
+    prevButton.addEventListener("click", () => {
+      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+      showSlide(currentSlide);
+    });
+
+    // Show first slide initially
+    showSlide(0);
   }
-
-  document.querySelector(".next").addEventListener("click", () => {
-    currentSlide = (currentSlide + 1) % totalSlides;
-    showSlide(currentSlide);
-  });
-
-  document.querySelector(".prev").addEventListener("click", () => {
-    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-    showSlide(currentSlide);
-  });
-
-  // Show first slide initially
-  showSlide(0);
 
   // Handle form submission
   const enquiryForm = document.getElementById("enquiryForm");
 
-  enquiryForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
+  if (enquiryForm) {
+    enquiryForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
 
-    const formData = {
-      name: document.getElementById("name").value,
-      email: document.getElementById("email").value,
-      mobile: `${document.getElementById("countryCode").value}${
-        document.getElementById("mobile").value
-      }`,
-      isWhatsapp: document.getElementById("isWhatsapp").checked,
-    };
+      const formData = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        mobile: `${document.getElementById("countryCode").value}${
+          document.getElementById("mobile").value
+        }`,
+        isWhatsapp: document.getElementById("isWhatsapp").checked,
+      };
 
-    try {
-      const response = await fetch("/api/enquiry", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      try {
+        const response = await fetch("/api/enquiry", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        });
 
-      const data = await response.json();
+        const data = await response.json();
 
-      if (data.success) {
-        alert("Thank you for your enquiry! We will contact you soon.");
-        enquiryForm.reset();
-      } else {
-        alert("Something went wrong. Please try again.");
+        if (data.success) {
+          alert("Thank you for your enquiry! We will contact you soon.");
+          enquiryForm.reset();
+        } else {
+          alert("Something went wrong. Please try again.");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        alert("Failed to submit enquiry. Please try again.");
       }
-    } catch (error) {
-      console.error("Error:", error);
-      alert("Failed to submit enquiry. Please try again.");
+    });
+  }
+
+  setTimeout(() => {
+    const promoDialog = document.getElementById("promoDialog");
+    console.log("Found dialog:", promoDialog);
+    if (promoDialog) {
+      promoDialog.showModal();
+      console.log("Dialog shown");
     }
-  });
-
-  document.addEventListener("DOMContentLoaded", () => {
-    console.log("DOM Content Loaded");
-
-    setTimeout(() => {
-      const promoDialog = document.getElementById("promoDialog");
-      console.log("Found dialog:", promoDialog);
-      if (promoDialog) {
-        promoDialog.showModal();
-        console.log("Dialog shown");
-      }
-    }, 1000);
-  });
+  }, 1000);
 });
-
 function openEnquiryDialog() {
   const dialog = document.getElementById("enquiryDialog");
   dialog.showModal();
@@ -123,39 +142,6 @@ const sectionObserver = new IntersectionObserver(
 document.querySelectorAll("section").forEach((section) => {
   sectionObserver.observe(section);
 });
-
-// Theme switching functionality
-const themeToggle = document.getElementById("themeToggle");
-const icon = themeToggle.querySelector("i");
-
-// Check for saved theme preference
-const savedTheme = localStorage.getItem("theme") || "light";
-document.documentElement.setAttribute("data-theme", savedTheme);
-updateIcon(savedTheme);
-
-themeToggle.addEventListener("click", () => {
-  const currentTheme = document.documentElement.getAttribute("data-theme");
-  const newTheme = currentTheme === "light" ? "dark" : "light";
-
-  document.documentElement.setAttribute("data-theme", newTheme);
-  localStorage.setItem("theme", newTheme);
-  updateIcon(newTheme);
-});
-
-function updateIcon(theme) {
-  icon.className = theme === "light" ? "fas fa-moon" : "fas fa-sun";
-}
-
-// Add prefers-color-scheme media query support
-if (window.matchMedia) {
-  const colorSchemeQuery = window.matchMedia("(prefers-color-scheme: dark)");
-  colorSchemeQuery.addEventListener("change", (e) => {
-    const newTheme = e.matches ? "dark" : "light";
-    document.documentElement.setAttribute("data-theme", newTheme);
-    localStorage.setItem("theme", newTheme);
-    updateIcon(newTheme);
-  });
-}
 
 // Dialog control functions
 function openPromoDialog() {

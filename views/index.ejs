@@ -154,6 +154,13 @@
           (window.plausible.q = window.plausible.q || []).push(arguments);
         };
     </script>
+    <link
+      rel="preload"
+      href="https://cdn.plyr.io/3.7.8/plyr.css"
+      as="style"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <script defer src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
   </head>
 
   <body class="font-newsreader">
@@ -601,70 +608,46 @@
         class="video-gallery-section"
         data-aos="fade-up"
       >
-        <!-- ... -->
         <h2>Hear from our clients</h2>
         <p class="section-subtitle">Experience our success stories</p>
-        <!-- ... -->
+
         <div class="video-row">
           <div class="video-card" data-aos="zoom-in">
             <div class="video-card-inner">
-              <div class="video-thumbnail">
-                <img
-                  src="https://via.placeholder.com/300x450"
-                  alt="Video thumbnail"
-                />
+              <div class="plyr__video-embed" id="player1">
+                <iframe
+                  src="https://www.youtube.com/embed/goWByVSSxAs?origin=https://plyr.io&amp;iv_load_policy=3&amp;modestbranding=1&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1&amp;controls=0&amp;disablekb=1&amp;fs=0"
+                  allowfullscreen
+                  allowtransparency
+                  allow="autoplay"
+                ></iframe>
               </div>
-              <iframe
-                width="491"
-                height="872"
-                src="https://www.youtube.com/embed/goWByVSSxAs"
-                title="TESTIMONIAL 1"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen
-              ></iframe>
             </div>
           </div>
 
           <div class="video-card" data-aos="zoom-in">
             <div class="video-card-inner">
-              <div class="video-thumbnail">
-                <img
-                  src="https://via.placeholder.com/300x450"
-                  alt="Video thumbnail"
-                />
+              <div class="plyr__video-embed" id="player2">
+                <iframe
+                  src="https://www.youtube.com/embed/0j-jqcfjR9M?origin=https://plyr.io&amp;iv_load_policy=3&amp;modestbranding=1&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1&amp;controls=0&amp;disablekb=1&amp;fs=0"
+                  allowfullscreen
+                  allowtransparency
+                  allow="autoplay"
+                ></iframe>
               </div>
-              <iframe
-                width="491"
-                height="872"
-                src="https://www.youtube.com/embed/0j-jqcfjR9M"
-                title="TESTIMONIAL 2"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen
-              ></iframe>
             </div>
           </div>
 
           <div class="video-card" data-aos="zoom-in">
             <div class="video-card-inner">
-              <div class="video-thumbnail">
-                <img
-                  src="https://via.placeholder.com/300x450"
-                  alt="Video thumbnail"
-                />
+              <div class="plyr__video-embed" id="player3">
+                <iframe
+                  src="https://www.youtube.com/embed/IeiVoerOyKg?origin=https://plyr.io&amp;iv_load_policy=3&amp;modestbranding=1&amp;playsinline=1&amp;showinfo=0&amp;rel=0&amp;enablejsapi=1&amp;controls=0&amp;disablekb=1&amp;fs=0"
+                  allowfullscreen
+                  allowtransparency
+                  allow="autoplay"
+                ></iframe>
               </div>
-              <iframe
-                width="491"
-                height="872"
-                src="https://www.youtube.com/embed/IeiVoerOyKg"
-                title="TESTIMONIAL 3"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin"
-                allowfullscreen
-              ></iframe>
             </div>
           </div>
         </div>
