@@ -38,9 +38,28 @@
   <link rel="canonical" href="https://fstn.co.in" />
 
   <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="assets/logo.svg" sizes="32x32" />
-  <link rel="apple-touch-icon" href="assets/logo.svg" />
-  <link rel="mask-icon" href="assets/logo.svg" color="transparent" />
+  <!-- Icons for all platforms using logo.svg -->
+<!-- Standard Favicon -->
+<link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+<link rel="icon" type="image/svg+xml" sizes="16x16" href="assets/logo.svg">
+<link rel="icon" type="image/svg+xml" sizes="32x32" href="assets/logo.svg">
+
+<!-- IE 8-10 -->
+<!--[if IE]><link rel="shortcut icon" type="image/svg+xml" href="assets/logo.svg"><![endif]-->
+
+<!-- Android -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#4a90e2">
+<link rel="icon" type="image/svg+xml" sizes="192x192" href="assets/logo.svg">
+<link rel="icon" type="image/svg+xml" sizes="512x512" href="assets/logo.svg">
+
+<!-- iOS -->
+<link rel="apple-touch-icon" href="assets/logo.svg">
+<link rel="mask-icon" href="assets/logo.svg" color="#4a90e2">
+<meta name="apple-mobile-web-app-title" content="FSTN">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+
 
   <!-- Stylesheets -->
   <link rel="stylesheet" href="styles.min.css" />
