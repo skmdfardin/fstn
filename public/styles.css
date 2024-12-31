@@ -1555,19 +1555,18 @@ blockquote {
 .video-row {
   display: flex;
   flex-wrap: wrap;
-  margin: -15px;
+  gap: 2rem;
+  justify-content: center;
 }
 
 .video-card {
-  flex: 0 0 calc(33.333% - 30px);
-  margin: 15px;
-  background: white;
-  padding: 2rem;
+  flex: 0 0 calc(33.333% - 2rem); /* Desktop: 3 cards per row */
+  max-width: 491px; /* Match video width */
+  background: var(--card-bg);
   border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 15px var(--shadow);
   transition: all 0.3s ease;
-  display: flex;
-  flex-direction: column;
+  overflow: hidden;
 }
 
 .video-card:hover {
@@ -1577,10 +1576,30 @@ blockquote {
 
 .video-card-inner {
   position: relative;
-  padding-bottom: 56.25%;
-  padding-top: 30px;
+  padding-bottom: 177.6%; /* Aspect ratio for vertical video (872/491 = 1.776) */
   height: 0;
   overflow: hidden;
+}
+@media screen and (max-width: 1024px) {
+  .video-card {
+    flex: 0 0 calc(50% - 2rem); /* 2 cards per row */
+  }
+}
+
+/* Mobile Layout */
+@media screen and (max-width: 768px) {
+  .video-card {
+    flex: 0 0 100%; /* 1 card per row */
+    margin: 0 auto;
+  }
+
+  .video-row {
+    gap: 1.5rem;
+  }
+
+  .video-gallery-section {
+    padding: 3rem 1rem;
+  }
 }
 
 .video-card-inner iframe {
