@@ -556,15 +556,14 @@ footer {
 
 .about-section {
   background: var(--light-bg);
-  padding-left: calc(var(--sidebar-width-collapsed) + 1rem);
   padding-top: 6rem;
   padding-bottom: 6rem;
-  padding-right: 3rem;
 }
 
 .about-container {
   max-width: 1200px;
   margin: 0 auto;
+  width: 100%;
 }
 
 .about-section h2 {
@@ -780,6 +779,7 @@ footer {
   align-items: center;
   gap: 1.5rem;
   margin-bottom: 2rem;
+  flex-direction: column;
 }
 
 .cert-list {
@@ -931,7 +931,7 @@ main section {
 
 .contact-container {
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 0;
 }
 
 .contact-section h2 {
@@ -1008,7 +1008,7 @@ main section {
 
 .bos-container {
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 0;
 }
 
 .bos-section h2 {
@@ -1277,7 +1277,7 @@ section.visible {
 
 .course-card {
   flex: 1 1 350px;
-  max-width: 400px;
+  max-width: 350px;
   background: white;
   border-radius: 12px;
   overflow: hidden;
@@ -1762,7 +1762,7 @@ blockquote {
 
 @media screen and (max-width: 768px) {
   .promo-dialog {
-    width: 70%;
+    width: 90%;
     aspect-ratio: auto;
     max-height: 80vh;
   }
