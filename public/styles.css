@@ -1799,3 +1799,17 @@ blockquote {
 /* .plyr--youtube .plyr__video-embed iframe { */
 /* z-index: -1; */
 /* } */
+.error-message {
+  color: #dc3545;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.invalid {
+  border-color: #dc3545;
+  background-color: #fff;
+}
+
+.invalid:focus {
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}

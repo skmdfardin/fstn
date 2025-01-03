@@ -1,4 +1,21 @@
 // Initialize AOS with optimized settings
+// Define validation rules at the top of script.js
+const validationRules = {
+  name: {
+    minLength: 3,
+    maxLength: 50,
+    pattern: /^[a-zA-Z\s]+$/,
+  },
+  email: {
+    pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+  },
+  mobile: {
+    minLength: 10,
+    maxLength: 15,
+    pattern: /^\+?[\d\s-]+$/,
+  },
+};
+
 AOS.init({
   offset: 100, // Reduced offset to trigger earlier
   delay: 0,
@@ -70,6 +87,19 @@ document.addEventListener("DOMContentLoaded", () => {
   function handleDialogSubmit(e) {
     e.preventDefault();
 
+    const form = e.target;
+    const inputs = form.querySelectorAll("input[required]");
+    let isValid = true;
+
+    inputs.forEach((input) => {
+      if (!validateField(input, validationRules)) {
+        isValid = false;
+      }
+    });
+
+    if (!isValid) return;
+
+    // Proceed with form submission
     const formData = {
       name: document.getElementById("dialogName").value,
       email: document.getElementById("dialogEmail").value,
@@ -153,4 +183,46 @@ function closePromoDialog() {
   const dialog = document.getElementById("promoDialog");
   dialog.close();
   dialog.style.display = "none";
+}
+
+function validateField(input, rules) {
+  const value = input.value;
+  const fieldName = input.name;
+  const errorDiv = document.getElementById(`${input.id}Error`);
+
+  let errorMessage = "";
+
+  switch (fieldName) {
+    case "name":
+      if (value.length < rules.name.minLength) {
+        errorMessage = `Name must be at least ${rules.name.minLength} characters`;
+      } else if (value.length > rules.name.maxLength) {
+        errorMessage = `Name cannot exceed ${rules.name.maxLength} characters`;
+      }
+      break;
+
+    case "email":
+      if (!rules.email.pattern.test(value)) {
+        errorMessage = "Please enter a valid email address";
+      }
+      break;
+
+    case "mobile":
+      if (!rules.mobile.pattern.test(value)) {
+        errorMessage = "Please enter a valid phone number";
+      } else if (value.length < rules.mobile.minLength) {
+        errorMessage = `Phone number must be at least ${rules.mobile.minLength} digits`;
+      }
+      break;
+  }
+
+  if (errorMessage) {
+    errorDiv.textContent = errorMessage;
+    input.classList.add("invalid");
+    return false;
+  } else {
+    errorDiv.textContent = "";
+    input.classList.remove("invalid");
+    return true;
+  }
 }

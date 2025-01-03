@@ -109,6 +109,7 @@
       href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap"
       rel="stylesheet"
     />
+
     <!-- Schema.org Markup -->
     <script type="application/ld+json">
       {
@@ -196,12 +197,26 @@
         >
           <div class="form-group">
             <label for="dialogName">Full Name *</label>
-            <input type="text" id="dialogName" name="name" required />
+            <input
+              type="text"
+              id="dialogName"
+              name="name"
+              required
+              onInput="validateField(this, validationRules)"
+            />
+            <div id="dialogNameError" class="error-message"></div>
           </div>
 
           <div class="form-group">
             <label for="dialogEmail">Email Address *</label>
-            <input type="email" id="dialogEmail" name="email" required />
+            <input
+              type="email"
+              id="dialogEmail"
+              name="email"
+              required
+              onInput="validateField(this, validationRules)"
+            />
+            <div id="dialogEmailError" class="error-message"></div>
           </div>
 
           <div class="form-group">
@@ -213,8 +228,15 @@
                 <option value="+44">+44 (UK)</option>
                 <option value="+971">+971 (UAE)</option>
               </select>
-              <input type="tel" id="dialogMobile" name="mobile" required />
+              <input
+                type="tel"
+                id="dialogMobile"
+                name="mobile"
+                required
+                onInput="validateField(this, validationRules)"
+              />
             </div>
+            <div id="dialogMobileError" class="error-message"></div>
           </div>
 
           <div class="form-group checkbox-group">

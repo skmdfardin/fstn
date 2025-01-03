@@ -9,6 +9,7 @@ import winston from "winston";
 import apiRoutes from "./routes/api.routes.js";
 import viewRoutes from "./routes/view.routes.js";
 import { securityHeaders } from "./middleware/security.js";
+// import helmet from "helmet";
 
 // Configure Winston logger
 const logger = winston.createLogger({
@@ -34,13 +35,12 @@ if (process.env.NODE_ENV !== "production") {
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-
 // Middleware
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(securityHeaders);
-
+// app.use(helmet());
 // Add Morgan middleware
 app.use(
   morgan("combined", {
