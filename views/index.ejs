@@ -189,7 +189,11 @@
       <div class="dialog-content">
         <button class="close-dialog" onclick="closeEnquiryDialog()">×</button>
         <h2>Enquire Now</h2>
-        <form id="enquiryFormDialog" class="contact-form">
+        <form
+          id="enquiryFormDialog"
+          class="contact-form"
+          onSubmit="handleDialogSubmit(event)"
+        >
           <div class="form-group">
             <label for="dialogName">Full Name *</label>
             <input type="text" id="dialogName" name="name" required />

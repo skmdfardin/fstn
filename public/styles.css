@@ -1214,12 +1214,15 @@ section.visible {
   transition: all 0.3s ease;
   animation: gradientShift 3s ease infinite;
   width: 8rem;
-  height: 8vh;
+  height: 5vh;
   /* margin-top: 0.5rem; */
   align-self: center;
   justify-content: center;
   word-wrap: break-word;
-  padding: 2%;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  font-family: "Newsreader";
+  font-size: medium;
 }
 
 .shortlink-btn i {

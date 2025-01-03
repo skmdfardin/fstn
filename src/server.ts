@@ -1,120 +1,58 @@
-import express, { Request, Response, NextFunction } from "express";
 import { fileURLToPath } from "url";
-import { dirname, join } from "path";
+import { dirname } from "path";
+import express, { Request, Response, NextFunction } from "express";
 import cors from "cors";
 import compression from "compression";
+import { join } from "path";
+import apiRoutes from "./routes/api.routes.js";
+import viewRoutes from "./routes/view.routes.js";
+import { securityHeaders } from "./middleware/security.js";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-// Initialize express app
 const app = express();
 const PORT = process.env.PORT || 3000;
-app.use(
-  compression({
-    level: 6,
-    threshold: 0,
-    filter: (req, res) => {
-      if (req.headers["x-no-compression"]) {
-        return false;
-      }
-      return compression.filter(req, res);
-    },
-  })
-);
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-// Add caching headers
-app.use((req, res, next) => {
-  if (req.url.match(/\.(css|js|jpg|png|svg)$/)) {
-    res.setHeader("Cache-Control", "public, max-age=31536000");
-  }
-  next();
-});
+app.use(securityHeaders);
+
 app.use(
-  express.static("public", {
-    maxAge: "1y",
-    etag: true,
+  compression({
+    level: 6,
+    threshold: 0,
+    filter: (req, res) => {
+      if (req.headers["x-no-compression"]) return false;
+      return compression.filter(req, res);
+    },
   })
 );
+
+// Static files & caching
+app.use(express.static("public", { maxAge: "1y", etag: true }));
+
 app.use(
   "/assets",
-  express.static("public/assets", {
-    maxAge: "1y",
-    etag: true,
-  })
+  express.static("public/assets", { maxAge: "1y", etag: true })
 );
-app.use((req, res, next) => {
-  res.setHeader(
-    "Strict-Transport-Security",
-    "max-age=31536000; includeSubDomains"
-  );
-  res.setHeader("X-Content-Type-Options", "nosniff");
-  res.setHeader("X-Frame-Options", "SAMEORIGIN");
-  next();
-});
 
-// Set view engine to EJS
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+// View engine setup
 app.set("view engine", "ejs");
 app.set("views", join(__dirname, "../views"));
-// Static files middleware
-app.use(express.static(join(__dirname, "../public")));
 
 // Routes
-app.get("/", (req: Request, res: Response) => {
-  res.render("index");
-});
-app.get("/tncs", (req, res) => {
-  res.render("tncs");
-});
-app.get("/privacy", (req, res) => {
-  res.render("privacy");
-});
-
-// API endpoints
-app.post("/api/enquiry", (req: Request, res: Response) => {
-  try {
-    const enquiryData = req.body;
-    console.log("Received enquiry:", enquiryData);
-    res.status(200).json({
-      success: true,
-      message: "Enquiry received successfully",
-    });
-  } catch (error) {
-    res.status(500).json({
-      success: false,
-      message: "Failed to process enquiry",
-    });
-  }
-});
-
-app.get("/manifest.json", (req, res) => {
-  res.sendFile(join(__dirname, "../public/manifest.json"));
-});
-
-// Add these routes after your existing routes
-app.get("/robots.txt", (req, res) => {
-  res.type("text/plain");
-  res.sendFile(join(__dirname, "../public/robots.txt"));
-});
-
-app.get("/sitemap.xml", (req, res) => {
-  res.type("application/xml");
-  res.sendFile(join(__dirname, "../public/sitemap.xml"));
-});
-// Error handling middleware
+app.use("/api", apiRoutes);
+app.use("/", viewRoutes);
+// Error handling middleware must be defined last
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.error(err.stack);
-  res.status(500).json({
-    success: false,
-    message: "Something went wrong!",
-  });
+
+  res.status(500).json({ success: false, message: "Something went wrong!" });
 });
 
-// Start server
 app.listen(PORT, () => {
   console.log(`✨ Server running on http://localhost:${PORT}`);
 });

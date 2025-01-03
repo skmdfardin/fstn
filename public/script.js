@@ -60,47 +60,47 @@ document.addEventListener("DOMContentLoaded", () => {
     // Show first slide initially
     showSlide(0);
   }
+  // Handle dialog form submission
+  const enquiryFormDialog = document.getElementById("enquiryFormDialog");
 
-  // Handle form submission
-  const enquiryForm = document.getElementById("enquiryForm");
+  if (enquiryFormDialog) {
+    enquiryFormDialog.addEventListener("submit", handleDialogSubmit);
+  }
 
-  if (enquiryForm) {
-    enquiryForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
+  function handleDialogSubmit(e) {
+    e.preventDefault();
 
-      const formData = {
-        name: document.getElementById("name").value,
-        email: document.getElementById("email").value,
-        mobile: `${document.getElementById("countryCode").value}${
-          document.getElementById("mobile").value
-        }`,
-        isWhatsapp: document.getElementById("isWhatsapp").checked,
-      };
+    const formData = {
+      name: document.getElementById("dialogName").value,
+      email: document.getElementById("dialogEmail").value,
+      mobile: `${document.getElementById("dialogCountryCode").value}${
+        document.getElementById("dialogMobile").value
+      }`,
+      isWhatsapp: document.getElementById("dialogIsWhatsapp").checked,
+    };
 
-      try {
-        const response = await fetch("/api/enquiry", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        });
-
-        const data = await response.json();
-
+    fetch("/api/enquiry", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.json())
+      .then((data) => {
         if (data.success) {
           alert("Thank you for your enquiry! We will contact you soon.");
-          enquiryForm.reset();
+          document.getElementById("enquiryFormDialog").reset();
+          closeEnquiryDialog();
         } else {
           alert("Something went wrong. Please try again.");
         }
-      } catch (error) {
+      })
+      .catch((error) => {
         console.error("Error:", error);
         alert("Failed to submit enquiry. Please try again.");
-      }
-    });
+      });
   }
-
   setTimeout(() => {
     const promoDialog = document.getElementById("promoDialog");
     console.log("Found dialog:", promoDialog);
